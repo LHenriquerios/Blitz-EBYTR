@@ -19,7 +19,7 @@ services:
     environment:
       MYSQL_USER: root
       MYSQL_PASSWORD: password
-      HOSTNAME: db
+      MYSQL_HOST: db
   db:
     container_name: blitz_ebytr_db
     image: mysql:8.0.21
