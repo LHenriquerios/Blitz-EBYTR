@@ -1,8 +1,5 @@
-'use strict';
-
 module.exports = {
-  async up (queryInterface, _Sequelize) {
-
+  async up(queryInterface, _Sequelize) {
     await queryInterface.bulkInsert('Status', [{
       id: 1,
       type: 'editável',
@@ -21,7 +18,7 @@ module.exports = {
     }], { timestemps: false });
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, _Sequelize) {
     await queryInterface.bulkDelete('Status', null, {});
-  }
+  },
 };
