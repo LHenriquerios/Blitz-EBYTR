@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "mocha ./tests/*$NAME*.test.js --exit",
+    "test:coverage": "nyc --include='src/**/*.js' npm run test",
     "start": "node .",
     "dev": "nodemon .",
     "drop": "npx sequelize-cli db:drop",
@@ -38,6 +39,7 @@
     "eslint-plugin-import": "^2.26.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.16",
+    "nyc": "^15.1.0",
     "sinon": "^14.0.0"
   }
 }

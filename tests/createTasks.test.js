@@ -11,32 +11,68 @@ const { expect } = chai;
 describe('Rota /tasks', () => {
 
         before(() => {
-            sinon.stub(Task, 'findAll')
-                .callsFake(taskMock.findAll);
+            sinon.stub(Task, 'create')
+                .callsFake(taskMock.create);
         });
     
         after(() => {
-            Task.findAll.restore();
+            Task.create.restore();
         });
 
-        describe('Consulta a lista de tarefas', () => {
-            let response;
+        describe('Insere um novo registro', () => {
+            let createRequest = {};
+            let firstTaskList = [];
+            let secondTaskList = [];
+            const newTask = {
+                "contents": "Arrumar a cama",
+                "status_id": 4
+            };
+    
             before(async () => {
-                response = await chai
+                firstTaskList = await chai
                     .request(server)
-                    .get('/tasks');
+                    .get('/tasks')
+                    .then(({body}) => body);
+                createRequest = await chai
+                    .request(server)
+                    .post('/tasks')
+                    .send(newTask);
+                secondTaskList = await chai
+                    .request(server)
+                    .get('/tasks')
+                    .then(({body}) => body);
             });
-
-        it(
-            'A requisição GET para a rota traz uma lista inicial ' +
-            'contendo três registros de tarefas',
-            () => {
-              expect(response.body).to.have.length(3);
-            }
-        );
-
-        it('Essa requisição deve retornar código de status 200', () => {
-            expect(response).to.have.status(200);
+    
+            it('firstTaskList: A primeira requisição GET para a rota deve retornar 2 registros', () => {
+                expect(firstTaskList).to.have.length(3);
+            });
+    
+            it('createRequest: A requisição POST para a rota retorna o código de status 201', () => {
+                expect(createRequest).to.have.status(201);
+            });
+    
+            it('createRequest: A requisição deve retornar um objeto no corpo da resposta', () => {
+                expect(createRequest.body).to.be.a('object');
+            });
+    
+            it('createRequest: O objeto possui a propriedade "message"', () => {
+                expect(createRequest.body)
+                  .to.have.property('message');
+            });
+    
+            it('createRequest: A propriedade "message" possui o texto "Novo usuário criado com sucesso"',
+              () => {
+                expect(createRequest.body.message)
+                  .to.be.equal('Novo usuário criado com sucesso');
+              }
+            );
+    
+            it('secondTaskList: A segunda requisição GET para rota deve retornar, por tanto, 3 registros', () => {
+                expect(secondTaskList).to.have.length(4);
+            });
+    
+            it('secondTaskList: O registro criado deve corresponder ao enviado na requisição POST', () => {
+                expect(secondTaskList[3]).to.contain(newTask);
+            })
         });
-    });
 });
