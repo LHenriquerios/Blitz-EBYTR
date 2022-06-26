@@ -2,13 +2,13 @@ const chai = require('chai');
 const sinon = require('sinon');
 const chaiHttp = require('chai-http');
 const server = require('../src/api');
-const Task = require('../src/database/models/task');
-const taskMock  = require('./mocks/models')
+const { Task } = require('../src/database/models');
+const { Task: taskMock }  = require('./mock/models')
 
 chai.use(chaiHttp);
 const { expect } = chai;
 
-describe('Rota /tasks', () => {
+describe('Rota post /tasks', () => {
 
         before(() => {
             sinon.stub(Task, 'create')
@@ -16,7 +16,7 @@ describe('Rota /tasks', () => {
         });
     
         after(() => {
-            Task.create.restore();
+            Task.restore();
         });
 
         describe('Insere um novo registro', () => {

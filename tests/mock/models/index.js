@@ -1,4 +1,4 @@
-const Tasks = require('./tasks.json');
+const Tasks = require('./Tasks.json');
 
 const mockCreate = (Instance, data) => {
   if(!data){
@@ -18,4 +18,4 @@ const Task = {
   findAll: async () => Tasks,
 };
 
-module.exports = Task;
+module.exports = { Task };
