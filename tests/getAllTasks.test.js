@@ -31,7 +31,7 @@ describe('Rota get /tasks', () => {
             'A requisição GET para a rota traz uma lista inicial ' +
             'contendo três registros de tarefas',
             () => {
-              expect(response.body).to.have.length(3);
+              expect(response.body).to.have.length(4);
             }
         );
 

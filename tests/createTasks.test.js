@@ -13,10 +13,13 @@ describe('Rota post /tasks', () => {
         before(() => {
             sinon.stub(Task, 'create')
                 .callsFake(taskMock.create);
+            sinon.stub(Task, 'findAll')
+                .callsFake(taskMock.findAll);
         });
     
         after(() => {
             Task.restore();
+            Task.findAll.restore();
         });
 
         describe('Insere um novo registro', () => {
