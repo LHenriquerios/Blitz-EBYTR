@@ -7,9 +7,15 @@ const getAll = async (_req, res) => {
   return res.status(StatusCodes.OK).json(tasks);
 };
 
+const getById = async (req, res) => {
+  const { id } = req.params;
+  const task = await taskServices.getById(id);
+  return res.status(StatusCodes.OK).json(task);
+};
+
 const createTask = async (req, res) => {
   const tasks = await taskServices.createTask(req.body);
   return res.status(StatusCodes.CREATED).json(tasks);
 };
 
-module.exports = { getAll, createTask };
+module.exports = { getAll, getById, createTask };

@@ -7,6 +7,7 @@ const schema = require('../../schemas');
 const taskRouter = express.Router();
 
 taskRouter.get('/', rescue(taskController.getAll));
+taskRouter.get('/:id', rescue(taskController.getById));
 taskRouter.post('/', validateJoi(schema), rescue(taskController.createTask));
 
 module.exports = taskRouter;
