@@ -16,7 +16,27 @@ const getById = async (id) => {
 
 const createTask = async (payload) => Task.create(payload);
 
-// const updateTask = async ({ id, contents, status_id }) => {
-// };
+const updateTask = async ({ id, contents, statusId }) => {
+  await getById(id);
+  await Task.update({ contents, statusId }, { where: { id } });
+  return getById(id);
+};
 
-module.exports = { getAll, getById, createTask };
+const deleteTask = async (id) => {
+  const isDeleted = await Task.destroy({ where: { id } }); // retorna 1 se deletou e 0 se não
+
+  if (!isDeleted) {
+    const error = { status: StatusCodes.GONE, message: 'Task not deleted' };
+    throw error;
+  }
+
+  return true;
+};
+
+module.exports = {
+  getAll,
+  getById,
+  createTask,
+  updateTask,
+  deleteTask,
+};
