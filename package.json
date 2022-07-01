@@ -2,7 +2,7 @@
   "name": "blitz-ebytr-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "mocha ./tests/*$NAME*.test.js --exit",
     "test:coverage": "nyc --include='src/**/*.js' npm run test",
