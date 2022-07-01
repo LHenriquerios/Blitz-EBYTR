@@ -25,7 +25,7 @@ describe('Rota post /tasks', () => {
             let secondTaskList = [];
             const newTask = {
                 "contents": "Arrumar a cama",
-                "status_id": 4
+                "statusId": 4
             };
     
             before(async () => {
@@ -43,7 +43,7 @@ describe('Rota post /tasks', () => {
                     .then(({body}) => body);
             });
     
-            it('firstTaskList: A primeira requisição GET para a rota deve retornar 2 registros', () => {
+            it('firstTaskList: A primeira requisição GET para a rota deve retornar 3 registros', () => {
                 expect(firstTaskList).to.have.length(3);
             });
     
@@ -60,14 +60,14 @@ describe('Rota post /tasks', () => {
                   .to.have.property('message');
             });
     
-            it('createRequest: A propriedade "message" possui o texto "Novo usuário criado com sucesso"',
+            it('createRequest: A propriedade "message" possui o texto "Nova task criada com sucesso"',
               () => {
                 expect(createRequest.body.message)
-                  .to.be.equal('Novo usuário criado com sucesso');
+                  .to.be.equal('Nova task criada com sucesso');
               }
             );
     
-            it('secondTaskList: A segunda requisição GET para rota deve retornar, por tanto, 3 registros', () => {
+            it('secondTaskList: A segunda requisição GET para rota deve retornar, por tanto, 4 registros', () => {
                 expect(secondTaskList).to.have.length(4);
             });
     
