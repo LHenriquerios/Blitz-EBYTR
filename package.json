@@ -6,6 +6,7 @@
   "scripts": {
     "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "test": "mocha ./tests/*$NAME*.test.js --exit",
+    "test:unit": "mocha ./tests/**/*$NAME*.test.js --exit",
     "test:coverage": "nyc --include='src/**/*.js' npm run test",
     "start": "node .",
     "dev": "nodemon .",
