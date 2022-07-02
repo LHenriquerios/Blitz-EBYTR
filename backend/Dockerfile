@@ -11,6 +11,5 @@ RUN npm install
 COPY . /app/back
 
 EXPOSE 3001 
-# QUANDO VIRAR UM CONTAINER
 
 CMD ["npm", "run", "dev"]

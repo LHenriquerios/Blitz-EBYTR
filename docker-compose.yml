@@ -3,7 +3,6 @@ version: "3"
 services:
   api:
     build: ./backend
-    user: node
     working_dir: /app
     volumes:
       - ./backend:/app/back
@@ -34,7 +33,6 @@ services:
     restart: always
     ports:
       - 3306:3306
-      - 33060:33060
     environment:
       MYSQL_ROOT_PASSWORD: password
 
