@@ -2,7 +2,8 @@ version: "3"
 
 services:
   api:
-    build: ./backend
+    build: .
+    user: node
     working_dir: /app
     volumes:
       - ./backend:/app/back
@@ -38,4 +39,4 @@ services:
 
 networks:
   default:
-    name: blitz_ebytr_net
+    name: blitz_ebytr_net 
