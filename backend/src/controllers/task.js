@@ -14,6 +14,7 @@ const getById = async (req, res) => {
 };
 
 const createTask = async (req, res) => {
+  console.log('createTask');
   await taskServices.createTask(req.body);
   return res.status(StatusCodes.CREATED).json({ message: 'Nova task criada com sucesso' });
 };
