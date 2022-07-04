@@ -2,20 +2,18 @@ version: "3"
 
 services:
   api:
-    build: .
-    user: node
+    build: ./backend
     working_dir: /app
     volumes:
-      - ./backend:/app/back
+      - ./backend:/app/bash
     container_name: blitz_ebytr_api
     tty: true
     stdin_open: true
     command: bash
-    restart: always
     depends_on:
       - db
     ports:
-      - 3001:3001
+      - 3031:3031
     environment:
       MYSQL_USER: root
       MYSQL_PASSWORD: password
@@ -25,7 +23,6 @@ services:
     container_name: 'blitz_ebytr_frontend'
     ports:
       - 3000:3000
-
     command: npm start
   db:
     container_name: blitz_ebytr_db

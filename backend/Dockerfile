@@ -1,5 +1,4 @@
 
-
 FROM node:16-alpine
 
 WORKDIR /app/back
@@ -10,6 +9,6 @@ RUN npm install
 
 COPY . /app/back
 
-EXPOSE 3001 
+EXPOSE 3031
 
-CMD ["npm", "run", "dev"]
+CMD [ "npm", "run", "start"]

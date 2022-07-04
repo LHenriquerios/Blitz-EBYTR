@@ -9,7 +9,7 @@ function App() {
   // GET request
   async function getTasks() {
     try {
-      const response = await fetch('http://localhost:3001/tasks');
+      const response = await fetch('http://localhost:3031/tasks');
       const data = await response.json();
       setTasks(data);
     } catch (error) {
@@ -20,7 +20,7 @@ function App() {
 
   async function getStatus() {
     // GET request status
-    fetch('http://localhost:3001/status')
+    fetch('http://localhost:3031/status')
       .then((response) => response.json())
       .then((data) => setStatus(data));
   }
@@ -32,13 +32,13 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ contents: newTask, statusId }),
     };
-    fetch('http://localhost:3001/tasks', requestOptions)
+    fetch('http://localhost:3031/tasks', requestOptions)
       .then((response) => response.json())
       .then((data) => setNewTask(data));
   }
 
   async function deleteTask(id) {
-    const response = await fetch(`http://localhost:3001/tasks/${id}`, { method: 'DELETE' });
+    const response = await fetch(`http://localhost:3031/tasks/${id}`, { method: 'DELETE' });
     const data = await response.json();
     // eslint-disable-next-line no-alert
     alert(data.message);
