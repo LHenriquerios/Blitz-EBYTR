@@ -1,33 +1,54 @@
 import React, { useState, useEffect } from 'react';
 
 function App() {
+  const [status, setStatus] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
+  const [statusId, setStatusId] = useState(1);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch('http://localhost:3001/tasks');
-        const data = await response.json();
-        setTasks(data);
-      } catch (error) {
-        console.log('error');
-      }
+  // GET request
+  async function getTasks() {
+    try {
+      const response = await fetch('http://localhost:3001/tasks');
+      const data = await response.json();
+      setTasks(data);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log('error');
     }
-    fetchData();
-  }, [newTask]);
+  }
 
-  function postNewTask() {
-    // POST request using fetch inside useEffect React hook
+  async function getStatus() {
+    // GET request status
+    fetch('http://localhost:3001/status')
+      .then((response) => response.json())
+      .then((data) => setStatus(data));
+  }
+
+  async function postNewTask() {
+    // POST request tasks
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: newTask, statusId: 1 }),
+      body: JSON.stringify({ contents: newTask, statusId }),
     };
     fetch('http://localhost:3001/tasks', requestOptions)
       .then((response) => response.json())
       .then((data) => setNewTask(data));
   }
+
+  async function deleteTask(id) {
+    const response = await fetch(`http://localhost:3001/tasks/${id}`, { method: 'DELETE' });
+    const data = await response.json();
+    // eslint-disable-next-line no-alert
+    alert(data.message);
+    setNewTask('');
+  }
+
+  useEffect(() => {
+    getTasks();
+    getStatus();
+  }, [newTask]);
 
   return (
     <>
@@ -36,8 +57,9 @@ function App() {
           <>
             <li key={task.id}>{`Tarefa: ${task.contents}`}</li>
             <li>{`Status: ${task.statusId}`}</li>
+            <button type="submit" onClick={() => deleteTask(task.id)}>Excluir</button>
             <br />
-
+            <br />
           </>
         ))}
       </ul>
@@ -47,8 +69,16 @@ function App() {
             name="contents"
             type="text"
             placeholder="Digite sua tarefa"
+            value={newTask}
             onChange={({ target: { value } }) => setNewTask(value)}
           />
+        </label>
+        <label htmlFor="status">
+          <select name="status" onChange={({ target: { value } }) => setStatusId(value)}>
+            {status.map((e) => (
+              <option key={e.id} value={e.id}>{ e.type }</option>
+            ))}
+          </select>
         </label>
         <button type="submit" onClick={() => postNewTask()}>Enviar</button>
       </div>
