@@ -1,15 +1,14 @@
 
-
 FROM node:16-alpine
 
 WORKDIR /app/back
 
-COPY package.json /app/back
+COPY package.json .
 
 RUN npm install
 
-COPY . /app/back
+COPY . .
 
-EXPOSE 3001 
+EXPOSE 3031
 
-CMD ["npm", "run", "dev"]
+CMD [ "npm", "run", "dev"]
