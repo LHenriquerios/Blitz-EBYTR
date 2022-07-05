@@ -4,14 +4,12 @@ Antes de tudo, comece clonando a aplicação com `git@github.com:LHenriquerios/B
 
 # Começando com Docker
 
-<strong>Backend</strong><br>
 Primeiramente para rodarmos nossos serviços basta usar o comando: `docker-compose up -d` com o docker já instalado.<br>
 
 Com esse comando subirá três containers, um para o backend com o ambiente node devidamente setado, um para o react, e outro com o mysql que é onde vamos guardar nossas informações no banco de dados.
 
 
-Tendo os containers executando agora precisamos usar o comando `exec -it blitz_ebytr_api sh` para abrirmos o CLI no nosso terminal.
-Dê um `cd bash` para entrar na pasta dentro do volume e pronto, podemos rodar os comandos necessários para executar nosso servidor.
+Tendo os containers executando agora precisamos usar o comando `docker exec -it blitz_ebytr_api bin/sh` para abrirmos o CLI no nosso terminal.
 
 Primeiramente você deve usar o comando:<br>
 `npx sequelize-cli db:create` que criará nosso banco de dados;<br>
@@ -21,8 +19,8 @@ e assim finalizamos os comandos do Sequelize que é o ORM escolhido para fazer o
 
 Com tudo pronto, use: `npm run dev` para rodar nossa api!
 
-<strong>Frontend</strong><br>
-Para o front basta executar o container react com `exec -it blitz_ebytr_frontend sh` e `npm start` em seguida para rodar nossa página react.
+Agora acesse <strong>http://localhost:3000/</strong> e aproveite!
+
 
 # Rodando Localmente
 Para rodarmos em nossa máquina precisamos ter o node instalado, a versão 14 já nos é suficente. (Caso não tenha o node instalado na sua máquina você pode consultar o site oficial https://nodejs.org/en/download/ e baixar de acordo com o seu sistema operacional) <br>
