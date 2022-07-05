@@ -1,6 +1,6 @@
 # Blitz-EBYTR
 
-Antes de tudo, comece clonando a aplicação com `git@github.com:LHenriquerios/Blitz-EBYTR.git`
+Antes de tudo, comece clonando a aplicação com `git clone git@github.com:LHenriquerios/Blitz-EBYTR.git`
 
 # Começando com Docker
 
